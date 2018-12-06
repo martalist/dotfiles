@@ -1,0 +1,8 @@
+# Local/private config goes in the included .gitconfig.local 
+[include]
+    path = ~/.gitconfig.local
+[alias]
+	st = status
+	ci = commit
+[core]
+	editor = vim
