@@ -2,7 +2,20 @@
 [include]
     path = ~/.gitconfig.local
 [alias]
-	st = status
-	ci = commit
+    st = status
+    ci = commit
+    tree = log --graph --oneline --decorate
+    logo = log --oneline
+    co = checkout
+    br = branch
+    ctags = !.git/hooks/ctags
+    
+    # inspiration for review-against came from:
+    #  - https://stackoverflow.com/questions/23235112/how-to-run-a-series-of-vim-commands-from-command-prompt
+    #  - https://stackoverflow.com/questions/3321492/git-alias-with-positional-parameters
+    #  - https://blog.jez.io/cli-code-review/
+    review-against = !REVIEW_MERGE_BASE=$(git merge-base HEAD "$1") && vim -p $(git diff --name-only "$REVIEW_MERGE_BASE") -c \":tabdo Gdiffsplit "$REVIEW_MERGE_BASE"\"
+    vdiff = !vim -p $(git diff --name-only | uniq) -c \":tabdo Gdiffsplit \"
+
 [core]
 	editor = vim
